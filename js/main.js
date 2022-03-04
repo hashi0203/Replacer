@@ -1,30 +1,29 @@
 $(document).ready(function(){
     function update_output() {
         $('#out_txt').val(function() {
-            var txt = $('#in_txt').val();
+            var txt = $('#in_txt').val();                // 変換したい文字列を取得
             $('.input-pattern').each(function(){
-                var bf = $(this).find('.bf').val();
+                var bf = $(this).find('.bf').val();      // 変換前の文字列を取得
                 if (bf != '') {
-                    bf = new RegExp(bf, 'g');
-                    var af = $(this).find('.af').val();
-                    txt = txt.replace(bf, af);
+                    bf = new RegExp(bf, 'g');            // 変換前の文字列を正規表現に変換
+                    var af = $(this).find('.af').val();  // 変換後の文字列を取得
+                    txt = txt.replace(bf, af);           // 正規表現に従って文字列を変換
                 }
             });
-            return txt;
+            return txt;                                  // 文字列を変換した結果
         });
     }
 
     function copy_output() {
-        $('#out_txt').select();
-        navigator.clipboard.writeText($('#out_txt').val());
-        $('#copy_alert').show();
+        $('#out_txt').select();                              // 出力欄を選択
+        navigator.clipboard.writeText($('#out_txt').val());  // 出力欄の内容をコピー
+        $('#copy_alert').show();                             // コピーしたことを示すアラートの表示
         setTimeout(function() {
-            // 出力欄からフォーカスを外し、コピーされないようにする
-            if (window.getSelection) {
+            if (window.getSelection) {                       // 出力欄からフォーカスを外し、コピーされないようにする
                 window.getSelection().removeAllRanges();
                 document.activeElement.blur();
             }
-            $('#copy_alert').hide();
+            $('#copy_alert').hide();                         // アラートの削除
         }, 1000);
     }
 
