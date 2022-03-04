@@ -3,11 +3,11 @@ $(document).ready(function(){
         $('#out_txt').val(function() {
             var txt = $('#in_txt').val();
             $('.input-pattern').each(function(){
-                var b = $(this).find('.bf').val();
-                if (b != '') {
-                    b = new RegExp(b, 'g');
-                    var a = $(this).find('.af').val();
-                    txt = txt.replace(b, a);
+                var bf = $(this).find('.bf').val();
+                if (bf != '') {
+                    bf = new RegExp(bf, 'g');
+                    var af = $(this).find('.af').val();
+                    txt = txt.replace(bf, af);
                 }
             });
             return txt;
@@ -35,12 +35,12 @@ $(document).ready(function(){
         <input type="text" class="ptn bf" style="width:100%;" placeholder="変換前">
         </div>
         <div class="col-1 d-flex align-items-center justify-content-center">
-        <span style="font-size:24px;">&#8811;</span>
+        <input type="button" value="&#8660;" class="swap">
         </div>
         <div class="col-5 d-flex align-items-center">
         <input type="text" class="ptn af" style="width:100%;" placeholder="変換後">
         </div>
-        <div class="col d-flex align-items-center justify-content-center">
+        <div class="col-1 d-flex align-items-center justify-content-center">
         <input type="button" value="－" class="del">
         </div>
         </div>`);
@@ -54,9 +54,16 @@ $(document).ready(function(){
         // ボタンの ID をキーにして、変換のペアを設定
         var transform_pairs = {
             clear: [["", ""]],
+            swap_all: [],
             punctuation: [["，", "、"], ["．", "。"]],
             file: [[" *: *", " "], [" *\\n$", ""], [" *\\n *", " "]]
         };
+
+        $('.input-pattern').each(function(){
+            var bf = $(this).find('.bf').val();
+            var af = $(this).find('.af').val();
+            transform_pairs["swap_all"].push([af, bf]);
+        });
 
         $('.input-pattern').remove();
         transform_pairs[$(this).attr('id')].forEach(function(e) {
@@ -67,6 +74,15 @@ $(document).ready(function(){
 
     $("#add").on("click", function() {
         add_input_pattern();
+    });
+
+    $(document).on("click", ".swap", function() {
+        var input_field = $(this).parent().parent()
+        var bf = input_field.find(".bf").val();
+        var af = input_field.find(".af").val();
+        input_field.find('.bf').val(af);
+        input_field.find('.af').val(bf);
+        update_output();
     });
 
     $(document).on("click", ".del", function() {

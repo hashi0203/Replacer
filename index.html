@@ -29,12 +29,15 @@
               <input type="button" value="クリア" class="template-set" id="clear" style="width:90%;">
             </div>
             <div class="col-2">
+              <input type="button" value="入れ替え &#8660;" class="template-set" id="swap_all" style="width:90%;">
+            </div>
+            <div class="col-2">
               <input type="button" value="句読点" class="template-set" id="punctuation" style="width:90%;">
             </div>
             <div class="col-2">
               <input type="button" value="ファイル名" class="template-set" id="file" style="width:90%;">
             </div>
-        </div>
+          </div>
 
           <div id="input_pattern_list">
             <div class="form-row input-pattern">
@@ -42,12 +45,12 @@
                 <input type="text" class="ptn bf" style="width:100%;" placeholder="変換前">
               </div>
               <div class="col-1 d-flex align-items-center justify-content-center">
-                <span style="font-size:24px;">&#8811;</span>
+                <input type="button" value="&#8660;" class="swap">
               </div>
               <div class="col-5 d-flex align-items-center">
                 <input type="text" class="ptn af" style="width:100%;" placeholder="変換後">
               </div>
-              <div class="col d-flex align-items-center justify-content-center">
+              <div class="col-1 d-flex align-items-center justify-content-center">
                 <input type="button" value="－" class="del">
               </div>
             </div>
@@ -78,12 +81,12 @@
 
         </form>
 
-        <h3 style="margin-top:20px;">使い方</h3>
+        <h3 style="margin-top:20px;">使い方・仕様</h3>
         <ul>
           <li>変換は上から順に適用される (同時ではない)</li>
           <li>入力と同時に変換される</li>
           <li>正規表現 (以下参照) も使える</li>
-          <li>変換後 $n のようにすると ( ) で括られた n 番目の文字列を再利用できる</li>
+          <li>変換後を $n のようにすると ( ) で括られた n 番目の文字列を再利用できる</li>
         </ul>
 
         <h3 style="margin-top:20px;"><a href="https://algorithm.joho.info/computer/wildcard-regular-expression/" target=”_blank”>正規表現</a></h3>
